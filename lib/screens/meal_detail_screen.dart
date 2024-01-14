@@ -13,6 +13,19 @@ class MealDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteMeals = ref.watch(favoriteMealsProvider);
+    final isFavorite = favoriteMeals.contains(meal);
+
+    var iconFavorite = Icons.favorite_border;
+
+    switch (isFavorite) {
+      case true:
+        iconFavorite = Icons.favorite;
+        break;
+      default:
+        break;
+    }
+
     Widget bodyContent = Column(
       children: [
         Image.network(
@@ -95,7 +108,7 @@ class MealDetailScreen extends ConsumerWidget {
                 ),
               );
             },
-            icon: const Icon(Icons.favorite),
+            icon: Icon(iconFavorite),
           ),
         ],
       ),
